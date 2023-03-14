@@ -1,12 +1,16 @@
-create fullfile 300000 allot \ the WHOLE file, max 3mb
-                               \ tri-null terminated (probably)
 create tape 20 allot \ 20 cell tape, can be changed.
 variable writehead \ read/writehead position, 0-index.
 create bstack 31 allot \ 2^5 - 1 maximum bracket indexing
+variable fstart
+variable flen
 
-: readfile ( fn -- flen, faddr) slurp-file 0 do dup i + c@ 2dup emit i fullfile ! loop ;
+: dstackall depth 0 do drop loop ;
+
+: readfile ( fn -- flen, faddr) slurp-file ; 
 \ fn is the name of the file. flen is file length, and faddr is the file address
+: loopthrough ( v:o, s -- ) 0 do dup i + c@ . loop ;
 
 s" main.bf" readfile
 
-2 fullfile @ .s
+flen !
+fstart ! .s
