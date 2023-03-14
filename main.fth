@@ -8,9 +8,12 @@ variable flen
 
 : readfile ( fn -- flen, faddr) slurp-file ; 
 \ fn is the name of the file. flen is file length, and faddr is the file address
-: loopthrough ( v:o, s -- ) 0 do dup i + c@ . loop ;
 
 s" main.bf" readfile
 
 flen !
-fstart ! .s
+fstart !
+
+: charinf flen @ 0 do fstart @ i + c@ emit loop ;
+
+charinf
