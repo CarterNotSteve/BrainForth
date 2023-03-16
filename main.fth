@@ -13,6 +13,9 @@ s" main.bf" slurp-file
 flen !
 fstart !
 
-: charinf flen @ 0 do fstart @ flen @ + i - c@ loop ;
+: indexins  ( n -- c ) fstart @ flen @ + - c@ ;
+  \ n : index, c: character-at
 
-charinf
+
+
+
