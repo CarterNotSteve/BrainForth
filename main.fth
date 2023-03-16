@@ -6,14 +6,13 @@ variable flen
 
 : dstackall depth 0 do drop loop ;
 
-: readfile ( fn -- flen, faddr) slurp-file ; 
 \ fn is the name of the file. flen is file length, and faddr is the file address
 
-s" main.bf" readfile
+s" main.bf" slurp-file
 
 flen !
 fstart !
 
-: charinf flen @ 0 do fstart @ i + c@ emit loop ;
+: charinf flen @ 0 do fstart @ flen @ + i - c@ loop ;
 
 charinf
